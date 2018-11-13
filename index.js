@@ -1,8 +1,12 @@
 const fs = require('fs')
 
-fs.watchFile(__dirname + '/txt/file.txt', { persistent: true, interval: 300 }, (curr, prev) => {
-  console.log('监视文件！')
-})
+//停止文件监视
+//fs.unwatchFile(filename, [listener]);
+
+/**
+* filename: 完整路径及文件名；
+* listener: 如果指定了 listener，只移除特定的监听器，否则移除全部监听器
+*/
 
 fs.unwatchFile(__dirname + '/txt/file.txt', () => {
   console.log('结束监视！')
