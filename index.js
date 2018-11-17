@@ -1,10 +1,15 @@
 const fs = require('fs')
 
-// fs.unlinkSync(path, callback) -- 同步
+// 读取目录内容 -- 异步
+// fs.readdir(path, options, callback)
 
-/*
-* 移除一个文件或符号, 完成回调只有一个可能的异常参数
+/**
+* path: 完整文件目录路径
+* options: 用于传入回调的文件名
+* callback: 回调函数
 */
 
-var fd = fs.unlinkSync(__dirname + '/txt/file.txt')
-console.log('fd', fd)
+fs.readdir(__dirname + '/txt', { encoding: 'utf8', withFileTypes: true }, (err, files) => {
+  if (err) throw err
+  console.log('files', files.isBlockDevice())
+})
