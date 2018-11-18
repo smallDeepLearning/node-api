@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-var fsWriteStream = fs.createWriteStream(
+var fsReadStream = fs.createReadStream(
   __dirname + '/txt/file.txt',
   {
     flags: 'r',
@@ -16,18 +16,18 @@ var fsWriteStream = fs.createWriteStream(
 
 // fd作为fs.ReadStream使用的整数型文件描述符
 
-console.log('文件流已写入的字节数', fsWriteStream.bytesWritten)
+console.log('文件流已读取的字节数', fsReadStream.bytesRead)
 
-console.log('文件流正在写入的文件的路径', fsWriteStream.path)
+console.log('文件流正在读取的文件的路径', fsReadStream.path)
 
-fsWriteStream.on('close', () => {
-  console.log('当fs.fsWriteStream的底层的文件描述符被关闭时触发')
+fsReadStream.on('close', () => {
+  console.log('当fs.fsReadStream的底层的文件描述符被关闭时触发')
 })
 
-fsWriteStream.on('open', (fd) => {
+fsReadStream.on('open', (fd) => {
   console.log('当fs.ReadStream的文件描述符被打开时触发', fd)
 })
 
-fsWriteStream.on('ready', () => {
+fsReadStream.on('ready', () => {
   console.log('当fs.ReadStream已准备被使用时触发')
 })
